@@ -49,7 +49,7 @@ Unity brain name: BananaBrain
 
 * An episode runs up to 300 steps
 * To goal of this project is to acheive an average cumulative score over 100 episode 13 or higher. In this project, I increase the target average rewards to 15 from 13 in order to make the agent play well on a single episode.
-* If you are curious about the detail algorithm and the performance with the trained agent, refer to [Report](./Report.md)
+* If you are curious about the detail algorithm and the performance with the trained agent, refer to [Report](http://htmlpreview.github.io/?https://github.com/muhyun/dqn_banana_navigation/blob/master/Report.html)
 
 ### Getting Started - Install Unity environment
 
