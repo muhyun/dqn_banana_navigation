@@ -24,6 +24,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 ### Project Detail
 
+* PyTorch is used as deep learning framework for defining DQN.
 * Unity is used as an RL environment and its detail is as below.
   * One agent is configured with the name of "BananaBrain", and the size of its action spaces is 4.
   * The size of a states is 37 dimension, and it is not fixel based.
@@ -52,12 +53,15 @@ Unity brain name: BananaBrain
 
 ### Getting Started - Install Unity environment
 
+In order to run this reinforcement learning example, you need to install the environment as well as python and PyTorch. The below is to guide you how to install the environment per your OS environment.
+
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
+
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
     - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
     - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
     - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
-    
+
     (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
     (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
