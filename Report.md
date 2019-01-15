@@ -1,16 +1,16 @@
 **Udacity's Deep Reinforcement Learning Nanodegree**
 
-# Report on Navigation Project 
+# Report on Navigation Project
 
 
 
 
 
-##Learning Algorithm
+## Learning Algorithm
 
 
 
-```pyth
+```py
 def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.995, target_score=15):
     scores = []
     scores_window = deque(maxlen=100)
@@ -38,7 +38,6 @@ def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.99
         if i_episode % 100 == 0:
             print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
 
-#         if np.mean(scores_window)>=target_score or (i_episode % 20 == 0 and not is_making_progress(scores_window)):
         if np.mean(scores_window)>=target_score:
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}\tMin Score: {:.2f}'.format(i_episode-100, np.mean(scores_window), np.min(scores_window)))
             torch.save(agent.qnetwork_local.state_dict(), 'model.pt')
@@ -51,7 +50,7 @@ def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.99
 
 
 
-##Network Architecture for Deep Q-Network (DQN)
+## Network Architecture for Deep Q-Network (DQN)
 
 
 
@@ -86,7 +85,7 @@ class QNetwork(nn.Module):
 
 
 
-##Experiments
+## Experiments
 
 
 
@@ -94,7 +93,7 @@ class QNetwork(nn.Module):
 
 
 
-##Plot of Rewards
+## Plot of Rewards
 
 
 
@@ -102,4 +101,4 @@ class QNetwork(nn.Module):
 
 
 
-##Ideas for Future Work
+## Ideas for Future Work
