@@ -70,5 +70,5 @@ In order to run this reinforcement learning example, you need to install the env
 
 ### Instructions
 
-Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
+Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  Or you can load `model.pt` which I trained already.
 
