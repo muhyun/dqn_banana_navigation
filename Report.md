@@ -2,10 +2,6 @@
 
 # Report on Navigation Project
 
-
-
-
-
 ## Learning Algorithm
 
 The agent is learning the policy using reinforcement learning method by follow the below steps;
@@ -56,8 +52,6 @@ self.optimizer.step()
 self.soft_update(self.qnetwork_local, self.qnetwork_target, TAU)    
 ```
 
-
-
 ## Network Architecture for Deep Q-Network (DQN)
 
 Neural network for DQN is a multilayer perceptron with 3 hidden layers which has 64 hidden units each. ReLU activation function is applied to each hidden layer. Dropout is defined and applied to the output of activation outputs, but the dropout probability is set as 0 which disables dropout for now.
@@ -89,11 +83,7 @@ class QNetwork(nn.Module):
         return self.fc4(x)
 ```
 
-
-
 ## Experiments
-
-
 
 ```
 Episode 100	Average Score: 0.45 in 0.79 sec
@@ -105,8 +95,6 @@ Episode 600	Average Score: 14.36 in 0.83 sec
 Episode 694	Average Score: 15.05 in 0.82 sec
 Environment solved in 594 episodes!	Average Score: 15.05	Min Score: 7.00
 ```
-
-
 
 ## Plot of Rewards
 
