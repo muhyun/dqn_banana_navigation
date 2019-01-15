@@ -85,6 +85,8 @@ class QNetwork(nn.Module):
 
 ## Experiments
 
+Starting MLP with 2 hidden layers, I ended up with an MLP with 3 hidden layer which give a good performance. I also applied dropout, but it won't help much.
+
 ```
 Episode 100	Average Score: 0.45 in 0.79 sec
 Episode 200	Average Score: 2.90 in 0.81 sec
@@ -103,6 +105,10 @@ The best performing agent has been trained with 694 episodes which gives the ave
 ![Rewards](./rewards.png)
 
 As seen in the above plot, the average score starts to be saturated after about 500 episodes. Why? I need to investigate further :)
+
+```
+[![A trained agent collected yello bananas trying to avoid blue ones](https://img.youtube.com/vi/I2NdbYmBB0M/0.jpg)](https://youtu.be/I2NdbYmBB0M)
+```
 
 ## Ideas for Future Work
 
