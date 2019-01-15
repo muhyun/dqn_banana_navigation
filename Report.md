@@ -107,7 +107,7 @@ The best performing agent has been trained with 694 episodes which gives the ave
 As seen in the above plot, the average score starts to be saturated after about 500 episodes. Why? I need to investigate further :)
 
 ```
-[![A trained agent collected yello bananas trying to avoid blue ones](https://img.youtube.com/vi/I2NdbYmBB0M/0.jpg)](https://youtu.be/I2NdbYmBB0M)
+[A trained agent collected yello bananas trying to avoid blue ones](https://img.youtube.com/vi/I2NdbYmBB0M/0.jpg)(https://youtu.be/I2NdbYmBB0M)
 ```
 
 ## Ideas for Future Work
