@@ -2,6 +2,39 @@
 
 # Report on Navigation Project
 
+
+
+## Network Architecture for Deep Q-Network (DQN)
+
+Neural network for DQN is a multilayer perceptron with 3 hidden layers which has 64 hidden units each. ReLU activation function is applied to each hidden layer. Dropout is defined and applied to the output of activation outputs, but the dropout probability is set as 0 which disables dropout for now.
+
+```py
+class QNetwork(nn.Module):
+    """Actor (Policy) Model."""
+
+    def __init__(self, state_size, action_size, seed, fc1_units=32, fc2_units=32, fc3_units=32):
+        """Initialize parameters and build model.
+        Params
+        ======
+            state_size (int): Dimension of each state
+            action_size (int): Dimension of each action
+            seed (int): Random seed
+        """
+        super(QNetwork, self).__init__()
+        self.seed = torch.manual_seed(seed)
+        self.fc1 = nn.Linear(state_size, fc1_units)
+        self.fc2 = nn.Linear(fc1_units, fc2_units)
+        self.fc3 = nn.Linear(fc2_units, fc3_units)
+        self.fc4 = nn.Linear(fc3_units, action_size)
+        self.dropout = nn.Dropout(0)
+
+    def forward(self, state):
+        x = self.dropout(F.relu(self.fc1(state)))
+        x = self.dropout(F.relu(self.fc2(x)))
+        x = self.dropout(F.relu(self.fc3(x)))
+        return self.fc4(x)
+```
+
 ## Learning Algorithm
 
 The agent is learning the policy using reinforcement learning method by follow the below steps;
@@ -52,36 +85,11 @@ self.optimizer.step()
 self.soft_update(self.qnetwork_local, self.qnetwork_target, TAU)    
 ```
 
-## Network Architecture for Deep Q-Network (DQN)
+## Additional resource on DQN
+- [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
+- [Demystifying Deep Reinforcement Learning](https://ai.intel.com/demystifying-deep-reinforcement-learning/#gs.SnoeJ9N2)
+- [Wikipedia: Q-learnig](https://en.wikipedia.org/wiki/Q-learning)
 
-Neural network for DQN is a multilayer perceptron with 3 hidden layers which has 64 hidden units each. ReLU activation function is applied to each hidden layer. Dropout is defined and applied to the output of activation outputs, but the dropout probability is set as 0 which disables dropout for now.
-
-```py
-class QNetwork(nn.Module):
-    """Actor (Policy) Model."""
-
-    def __init__(self, state_size, action_size, seed, fc1_units=32, fc2_units=32, fc3_units=32):
-        """Initialize parameters and build model.
-        Params
-        ======
-            state_size (int): Dimension of each state
-            action_size (int): Dimension of each action
-            seed (int): Random seed
-        """
-        super(QNetwork, self).__init__()
-        self.seed = torch.manual_seed(seed)
-        self.fc1 = nn.Linear(state_size, fc1_units)
-        self.fc2 = nn.Linear(fc1_units, fc2_units)
-        self.fc3 = nn.Linear(fc2_units, fc3_units)
-        self.fc4 = nn.Linear(fc3_units, action_size)
-        self.dropout = nn.Dropout(0)
-
-    def forward(self, state):
-        x = self.dropout(F.relu(self.fc1(state)))
-        x = self.dropout(F.relu(self.fc2(x)))
-        x = self.dropout(F.relu(self.fc3(x)))
-        return self.fc4(x)
-```
 
 ## Experiments
 

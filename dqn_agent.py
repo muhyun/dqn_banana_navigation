@@ -34,8 +34,8 @@ class Agent():
         self.seed = random.seed(seed)
 
         # Q-Network
-        self.qnetwork_local = QNetwork(state_size, action_size, seed, 32, 32).to(device)
-        self.qnetwork_target = QNetwork(state_size, action_size, seed, 32, 32).to(device)
+        self.qnetwork_local = QNetwork(state_size, action_size, seed, 64, 64, 64).to(device)
+        self.qnetwork_target = QNetwork(state_size, action_size, seed, 64, 64, 64).to(device)
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
 
         # Replay memory
@@ -71,8 +71,6 @@ class Agent():
 
         # Epsilon-greedy action selection
         if random.random() > eps:
-#             print('max predicted action {}'.format(action_values))
-#             print('target next ', action_values.detach().max(1)[0].unsqueeze(1))
             return np.argmax(action_values.cpu().data.numpy())
         else:
             return random.choice(np.arange(self.action_size))
@@ -87,17 +85,11 @@ class Agent():
         """
         states, actions, rewards, next_states, dones = experiences
 
-        ## TODO: compute and minimize the loss
-        
-        "*** YOUR CODE HERE ***"
         Q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1) # [batch_size, 1]
         Q_targets = rewards + (gamma * Q_targets_next * (1-dones)) # [batch_size, 1]
 #         Q_expected_raw = self.qnetwork_local(states) # [batch_size, 4] - predicted rewards for each action
         Q_expected = self.qnetwork_local(states).gather(1, actions) # [batch_size, 1] - predicted reward for the selected action
         
-#         print('\nin a learn loop - target ', Q_targets_next.shape, Q_targets.shape)
-#         print('in a learning loop - expected', actions.shape, Q_expected_raw.shape, Q_expected.shape)
-
         loss = F.mse_loss(Q_expected, Q_targets)
         self.optimizer.zero_grad()
         loss.backward()

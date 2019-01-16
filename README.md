@@ -24,7 +24,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 ### Project Detail
 
-* PyTorch is used as deep learning framework for defining DQN.
+* PyTorch is used as deep learning framework for defining DQN. If we are curious about the theory of DQN used in this project, please refer to [Report](./Report.pdf)
 * Unity is used as an RL environment and its detail is as below.
   * One agent is configured with the name of "BananaBrain", and the size of its action spaces is 4.
   * The size of a states is 37 dimension, and it is not fixel based.
@@ -51,6 +51,23 @@ Unity brain name: BananaBrain
 * To goal of this project is to acheive an average cumulative score over 100 episode 13 or higher. In this project, I increase the target average rewards to 15 from 13 in order to make the agent play well on a single episode.
 * If you are curious about the detail algorithm and the performance with the trained agent, refer to [Report](./Report.md) ([PDF](./Report.pdf) version)
 
+
+### Codes in this project
+
+- Navigation.ipynb
+  - A Jupyter notebook where all the code execution happens from RL environment creation, RL training, and testing.
+- dqn_agent.py
+  - A module which defines Agent class and ReplayBuffer for experience replay.
+  - Agent class;
+    - chooses an action using the policy
+    - updates the replay buffer, and trigger DQN training
+    - executes DQN training and updates the target policy gradually
+  - ReplayBuffer class;
+    - provides an interface for adding a tuple into the buffer
+    - provides a mini-batch from the buffer for mini-batch SGD training
+- model.py
+  - QNetwork class is defines a DQN model in PyTorch
+
 ### Getting Started - Install Unity environment
 
 In order to run this reinforcement learning example, you need to install the environment as well as python and PyTorch. The below is to guide you how to install the environment per your OS environment.
@@ -71,4 +88,10 @@ In order to run this reinforcement learning example, you need to install the env
 ### Instructions
 
 Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  Or you can load `model.pt` which I trained already.
+
+### Curious on where to apply RL?
+
+[Asynchronous Advantage Actor-Critic Agent for Starcraft II](https://arxiv.org/abs/1807.08217)
+
+
 
