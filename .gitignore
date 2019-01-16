@@ -1,4 +1,7 @@
-i# Byte-compiled / optimized / DLL files
+*Banana*
+*.mov
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
