@@ -3,39 +3,21 @@
 # Report on Navigation Project
 
 
+## Short descriptionon Deep Q-Network
 
-## Network Architecture for Deep Q-Network (DQN)
+This project demonstrates on how an agent can learn by interacting with the environment using Deep Q-Network reinforcement learning. Deep Q-Network, or DQN, is a kind of Q-Learning which uses deep learning rather than Q-Table because Q-Table is limited once the state space gets large or even continous. As an agent interacts with the environment using the policy, DQN policy is being trained to maximize the expected total rewards.
 
-Neural network for DQN is a multilayer perceptron with 3 hidden layers which has 64 hidden units each. ReLU activation function is applied to each hidden layer. Dropout is defined and applied to the output of activation outputs, but the dropout probability is set as 0 which disables dropout for now.
-
-```py
-class QNetwork(nn.Module):
-    """Actor (Policy) Model."""
-
-    def __init__(self, state_size, action_size, seed, fc1_units=32, fc2_units=32, fc3_units=32):
-        """Initialize parameters and build model.
-        Params
-        ======
-            state_size (int): Dimension of each state
-            action_size (int): Dimension of each action
-            seed (int): Random seed
-        """
-        super(QNetwork, self).__init__()
-        self.seed = torch.manual_seed(seed)
-        self.fc1 = nn.Linear(state_size, fc1_units)
-        self.fc2 = nn.Linear(fc1_units, fc2_units)
-        self.fc3 = nn.Linear(fc2_units, fc3_units)
-        self.fc4 = nn.Linear(fc3_units, action_size)
-        self.dropout = nn.Dropout(0)
-
-    def forward(self, state):
-        x = self.dropout(F.relu(self.fc1(state)))
-        x = self.dropout(F.relu(self.fc2(x)))
-        x = self.dropout(F.relu(self.fc3(x)))
-        return self.fc4(x)
-```
+### Additional resource on DQN
+- [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
+- [Demystifying Deep Reinforcement Learning](https://ai.intel.com/demystifying-deep-reinforcement-learning/#gs.SnoeJ9N2)
+- [Wikipedia: Q-learnig](https://en.wikipedia.org/wiki/Q-learning)
 
 ## Learning Algorithm
+
+This project adopts well-known DQN techniques to stablize the learning such as;
+
+- Experience Reply - to break the sequential dependency in learning
+- Target network - not to have a moving target during learning
 
 The agent is learning the policy using reinforcement learning method by follow the below steps;
 
@@ -84,16 +66,52 @@ self.optimizer.step()
 # ------------------- update target network ------------------- #
 self.soft_update(self.qnetwork_local, self.qnetwork_target, TAU)    
 ```
+## Network Architecture for Deep Q-Network (DQN)
 
-## Additional resource on DQN
-- [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
-- [Demystifying Deep Reinforcement Learning](https://ai.intel.com/demystifying-deep-reinforcement-learning/#gs.SnoeJ9N2)
-- [Wikipedia: Q-learnig](https://en.wikipedia.org/wiki/Q-learning)
+Neural network for DQN is a multilayer perceptron with 3 hidden layers which has 64 hidden units each. ReLU activation function is applied to each hidden layer. Dropout is defined and applied to the output of activation outputs, but the dropout probability is set as 0 which disables dropout for now.
+
+```py
+class QNetwork(nn.Module):
+    """Actor (Policy) Model."""
+
+    def __init__(self, state_size, action_size, seed, fc1_units=32, fc2_units=32, fc3_units=32):
+        """Initialize parameters and build model.
+        Params
+        ======
+            state_size (int): Dimension of each state
+            action_size (int): Dimension of each action
+            seed (int): Random seed
+        """
+        super(QNetwork, self).__init__()
+        self.seed = torch.manual_seed(seed)
+        self.fc1 = nn.Linear(state_size, fc1_units)
+        self.fc2 = nn.Linear(fc1_units, fc2_units)
+        self.fc3 = nn.Linear(fc2_units, fc3_units)
+        self.fc4 = nn.Linear(fc3_units, action_size)
+        self.dropout = nn.Dropout(0)
+
+    def forward(self, state):
+        x = self.dropout(F.relu(self.fc1(state)))
+        x = self.dropout(F.relu(self.fc2(x)))
+        x = self.dropout(F.relu(self.fc3(x)))
+        return self.fc4(x)
+```
 
 
 ## Experiments
 
-Starting MLP with 2 hidden layers, I ended up with an MLP with 3 hidden layer which give a good performance. I also applied dropout, but it won't help much.
+In order to find the good performing hyper-parameters, 7 experiments have been done by chaning the number of hidden layers, the number of hidden units, batch size, and update step manually. Among 7 experiments, 3 hidden layers (64-64-64 units each) is chosen as a final hyper-parameter because it shows high average score as well as high minimum score.
+
+| DQN (default batch size: 8, update step: 4) | # of episode | average score | minimum score |
+| ------------------------------------- | ------------ | ------------- |--|
+| 2 Hidden layers (32-32 units each) | 424 | 13.02 | 1.00 |
+| 3 Hidden layers (32-32-16 units each) | 442 | 13.01 |1.00|
+| 3 Hidden layers (32-32-32 units each) | 449 | 13.01 |1.00|
+| 3 Hidden layers (64-32-32 units each) | 390 | 13.00 |5.00|
+| **3 Hidden layers (64-64-64 units each)** | 421 | 13.04 |5.00|
+| 3 Hidden layers (64-64-64 units each) with batch 128 | 385 | 13.01 |2.00|
+| 3 Hidden layers (64-64-64 units each) with update step 8 | 451 | 13.01 |2.00|
+With the selected one, I extended the target score from 13 to 15 in order to train the DQN longer. As a result, it gives higher mininum score as 7.
 
 ```
 Episode 100	Average Score: 0.45 in 0.79 sec
@@ -128,3 +146,6 @@ Different methods of DQN could be applied to find which one effectively improves
 - [Dueling DQN]
 - [Rainbow]
 
+### More curious on more challenging RL task?
+
+[Asynchronous Advantage Actor-Critic Agent for Starcraft II](https://arxiv.org/abs/1807.08217)

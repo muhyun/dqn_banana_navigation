@@ -87,11 +87,11 @@ In order to run this reinforcement learning example, you need to install the env
 
 ### Instructions
 
-Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  Or you can load `model.pt` which I trained already.
+You first might want to prepare your virtual environment to avoid any conflict with existing libraries installed. Refer to (<https://docs.python-guide.org/dev/virtualenvs/>) to learn how to create a virtual environment.
 
-### Curious on where to apply RL?
+Then, follow the instructions in `Navigation.ipynb` to get started with training your own agent!  Or you can load `model.pt` which I trained already.
 
-[Asynchronous Advantage Actor-Critic Agent for Starcraft II](https://arxiv.org/abs/1807.08217)
+
 
 
 
