@@ -111,6 +111,7 @@ In order to find the good performing hyper-parameters, 7 experiments have been d
 | **3 Hidden layers (64-64-64 units each)** | 421 | 13.04 |5.00|
 | 3 Hidden layers (64-64-64 units each) with batch 128 | 385 | 13.01 |2.00|
 | 3 Hidden layers (64-64-64 units each) with update step 8 | 451 | 13.01 |2.00|
+
 With the selected one, I extended the target score from 13 to 15 in order to train the DQN longer. As a result, it gives higher mininum score as 7.
 
 ```
@@ -139,12 +140,11 @@ As seen in the above plot, the average score starts to be saturated after about 
 
 ## Ideas for Future Work
 
-Different methods of DQN could be applied to find which one effectively improves the performance. They are
+DQN is believed to be stable as it keeps learning, but it sometimes shows a symptom of catastrophic forgetting, which means that the agent's performance drops significantly after a a period of learing. One of the reason of this failure is that DQN's instability of approximating the Q-function over large-space using Bellman updates.
 
-- [Double DQN](https://www.ri.cmu.edu/pub_files/pub1/thrun_sebastian_1993_1/thrun_sebastian_1993_1.pdf)
-- [Prioritized Experience Replay]
-- [Dueling DQN]
-- [Rainbow]
+One of approach to address is this issues to use imatation learning with reinforcement learning, where an expert demonstrates actions, and the policy is pre-trained using this information. In this way, the result can achieve better performance than reinforcement learning.
+
+Reference : [Reinforcement and Imitation Learning for Diverse Visuomotor Skills](https://deepmind.com/research/publications/reinforcement-and-imitation-learning-diverse-visuomotor-skills/)
 
 ### More curious on more challenging RL task?
 
